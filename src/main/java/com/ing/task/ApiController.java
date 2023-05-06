@@ -16,6 +16,11 @@ public class ApiController {
         return new AtmServiceCalculator(orders).calculate();
     }
 
+    @PostMapping(value = "/onlinegame/calculate", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Clan> calculateOrder(@RequestBody Game game) {
+        return new ResponseEntity(new GameCalculator(game).calculate(), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/transactions/report", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Account> reportTransactions(@RequestBody Transaction[] transactions) {
         return new ResponseEntity(new TransactionsReporter(transactions).generateReport(), HttpStatus.OK);

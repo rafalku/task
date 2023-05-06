@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TaskApplicationTests {
 
-    private static final String[] ENDPOINTS = {"/atms/calculateOrder", "/transactions/report"};
+    private static final String[] ENDPOINTS = {"/atms/calculateOrder", "/transactions/report", "/onlinegame/calculate"};
 
     @Value(value = "${local.server.port}")
     private int port;
