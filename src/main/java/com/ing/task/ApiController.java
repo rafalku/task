@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiController {
 
+    @PostMapping(value = "/atms/calculateOrder", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String calculateOrder(@RequestBody AtmServiceOrder[] orders) {
+        return new AtmServiceCalculator(orders).calculate();
+    }
+
     @PostMapping(value = "/transactions/report", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Account> reportTransactions(@RequestBody Transaction[] transactions) {
         return new ResponseEntity(new TransactionsReporter(transactions).generateReport(), HttpStatus.OK);
