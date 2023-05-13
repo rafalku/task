@@ -37,6 +37,10 @@ public class GameCalculator {
             for (Iterator<Clan> iterator = clans.iterator(); iterator.hasNext(); ) {
                 Clan clan = iterator.next();
                 int numberOfPlayers = clan.getNumberOfPlayers();
+                if (numberOfPlayers > groupCount) {
+                    iterator.remove();
+                    continue;
+                }
                 if (currentGroupCount + numberOfPlayers <= groupCount) {
                     group.add(clan);
                     currentGroupCount += numberOfPlayers;
@@ -58,7 +62,9 @@ public class GameCalculator {
                     break;
                 }
             }
-            gamePlan.add(group);
+            if (group.size() > 0) {
+                gamePlan.add(group);
+            }
         }
 
         return gamePlan;
