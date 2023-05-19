@@ -7,5 +7,5 @@ import lombok.Getter;
 public class Transaction {
     private String debitAccount;
     private String creditAccount;
-    private double amount;
+    private String amount;
 }

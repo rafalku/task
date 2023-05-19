@@ -3,6 +3,7 @@ package com.ing.task;
 
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +14,18 @@ class Account {
     private final String account;
     private int creditCount = 0;
     private int debitCount = 0;
-    private double balance = 0;
+    private BigDecimal balance = new BigDecimal(0);
 
     public Account(String accountNumber) {
         this.account = accountNumber;
     }
 
-    public void increaseBalance(double amount) {
-        this.balance += amount;
+    public void increaseBalance(String amount) {
+        this.balance = this.balance.add(new BigDecimal(amount));
     }
 
-    public void decreaseBalance(double amount) {
-        this.balance -= amount;
+    public void decreaseBalance(String amount) {
+        this.balance = this.balance.subtract(new BigDecimal(amount));
     }
 
     public void incrementCreditCount() {
@@ -49,7 +50,7 @@ public class TransactionsReporter {
 
     public Collection<Account> generateReport() {
         String debitAccountNumber, creditAccountNumber;
-        double amount;
+        String amount;
         Account account;
         for (Transaction transaction : transactions) {
             debitAccountNumber = transaction.getDebitAccount();

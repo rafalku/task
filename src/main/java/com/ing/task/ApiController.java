@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+import java.util.List;
+
 
 @RestController
 public class ApiController {
@@ -17,13 +20,13 @@ public class ApiController {
     }
 
     @PostMapping(value = "/onlinegame/calculate", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Clan> calculateOrder(@RequestBody Game game) {
-        return new ResponseEntity(new GameCalculator(game).calculate(), HttpStatus.OK);
+    public ResponseEntity<List<List<Clan>>> calculateOrder(@RequestBody Game game) {
+        return new ResponseEntity<>(new GameCalculator(game).calculate(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/transactions/report", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Account> reportTransactions(@RequestBody Transaction[] transactions) {
-        return new ResponseEntity(new TransactionsReporter(transactions).generateReport(), HttpStatus.OK);
+    public ResponseEntity<Collection<Account>> reportTransactions(@RequestBody Transaction[] transactions) {
+        return new ResponseEntity<>(new TransactionsReporter(transactions).generateReport(), HttpStatus.OK);
     }
 
 }
